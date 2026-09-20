@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Profiling;
 using System.Diagnostics;
 using TMPro;
 
@@ -7,36 +6,36 @@ using TMPro;
 public class F3Debuger : MonoBehaviour
 {
     [Header("Configuración")]
-    [Tooltip("Frecuencia de actualización para los FPS y la CPU (en segundos)")]
     [SerializeField] private float updateInterval = 0.5f;
 
     [Header("Referencias")]
-    [Tooltip("Asigna la cámara principal o la cámara del jugador")]
     [SerializeField] private Transform playerTransform;
 
     private TextMeshProUGUI debugText;
     private bool isVisible = false;
 
-    // Métricas dinámicas
+    // FPS
     private float fpsAccumulator = 0f;
     private int fpsFrames = 0;
     private float fpsLeftTime;
     private int currentFps = 0;
-    private long allocatedRamMB = 0;
 
-    // Cálculo de porcentaje de CPU
+    // RAM
+    private long ramUsageMB = 0;
+
+    // CPU
     private Process currentProcess;
     private System.TimeSpan lastCpuTime;
     private System.DateTime lastSampleTime;
     private float cpuUsagePercent = 0f;
     private int processorCount = 1;
 
-    // Caché de hardware estático
+    // Hardware
     private string cpuName;
     private string gpuName;
     private int vramMB;
 
-    // Buffer de caracteres (Cero GC Alloc)
+    // Buffer
     private readonly char[] textBuffer = new char[512];
     private int bufferLength = 0;
 
@@ -51,22 +50,25 @@ public class F3Debuger : MonoBehaviour
 
         fpsLeftTime = updateInterval;
 
-        // Caché de hardware
+        // Hardware
         cpuName = SystemInfo.processorType;
         gpuName = SystemInfo.graphicsDeviceName;
         vramMB = SystemInfo.graphicsMemorySize;
         processorCount = SystemInfo.processorCount;
 
-        // Inicializar lectura de proceso para la CPU
+        // Proceso actual
         try
         {
             currentProcess = Process.GetCurrentProcess();
+
             lastCpuTime = currentProcess.TotalProcessorTime;
             lastSampleTime = System.DateTime.UtcNow;
+
+            UpdateRam();
         }
         catch
         {
-            UnityEngine.Debug.LogWarning("F3Debuger: No se pudo acceder a las métricas del proceso del sistema.");
+            currentProcess = null;
         }
 
         debugText.enabled = isVisible;
@@ -80,24 +82,27 @@ public class F3Debuger : MonoBehaviour
             debugText.enabled = isVisible;
         }
 
-        if (!isVisible || playerTransform == null) return;
+        if (!isVisible || playerTransform == null)
+            return;
 
-        // --- Lectura de RAM constante (Cada Frame) ---
-        allocatedRamMB = Profiler.GetTotalAllocatedMemoryLong() / (1024 * 1024);
+        // RAM actualizada cada frame
+        UpdateRam();
 
-        // --- Muestreo de FPS y CPU por Intervalos ---
+        // FPS
         fpsAccumulator += Time.timeScale / Time.unscaledDeltaTime;
         fpsFrames++;
+
         fpsLeftTime -= Time.unscaledDeltaTime;
 
-        if (fpsLeftTime <= 0.0f)
+        if (fpsLeftTime <= 0f)
         {
-            currentFps = Mathf.RoundToInt(fpsAccumulator / fpsFrames);
+            currentFps = Mathf.RoundToInt(
+                fpsAccumulator / fpsFrames
+            );
 
-            // Calcular porcentaje de CPU en el intervalo
             CalculateCpuUsage();
 
-            fpsAccumulator = 0.0f;
+            fpsAccumulator = 0f;
             fpsFrames = 0;
             fpsLeftTime = updateInterval;
         }
@@ -105,25 +110,74 @@ public class F3Debuger : MonoBehaviour
         RenderText();
     }
 
+    private void UpdateRam()
+    {
+        if (currentProcess == null)
+            return;
+
+        try
+        {
+            currentProcess.Refresh();
+
+            // Memoria física actualmente residente
+            long workingSet = currentProcess.WorkingSet64;
+
+            // Memoria privada del proceso
+            long privateMemory = currentProcess.PrivateMemorySize64;
+
+            // Usar Working Set si es válido
+            if (workingSet > 0)
+            {
+                ramUsageMB = workingSet / (1024 * 1024);
+            }
+            else if (privateMemory > 0)
+            {
+                ramUsageMB = privateMemory / (1024 * 1024);
+            }
+        }
+        catch
+        {
+            // Mantener el último valor válido
+        }
+    }
+
     private void CalculateCpuUsage()
     {
-        if (currentProcess == null) return;
+        if (currentProcess == null)
+            return;
 
-        currentProcess.Refresh();
-        System.DateTime now = System.DateTime.UtcNow;
-        System.TimeSpan cpuTime = currentProcess.TotalProcessorTime;
-
-        double timeWindow = (now - lastSampleTime).TotalMilliseconds;
-        double cpuTimeUsed = (cpuTime - lastCpuTime).TotalMilliseconds;
-
-        if (timeWindow > 0)
+        try
         {
-            cpuUsagePercent = (float)((cpuTimeUsed / (timeWindow * processorCount)) * 100.0);
-            cpuUsagePercent = Mathf.Clamp(cpuUsagePercent, 0f, 100f);
-        }
+            currentProcess.Refresh();
 
-        lastCpuTime = cpuTime;
-        lastSampleTime = now;
+            System.DateTime now = System.DateTime.UtcNow;
+            System.TimeSpan cpuTime =
+                currentProcess.TotalProcessorTime;
+
+            double timeWindow =
+                (now - lastSampleTime).TotalMilliseconds;
+
+            double cpuTimeUsed =
+                (cpuTime - lastCpuTime).TotalMilliseconds;
+
+            if (timeWindow > 0)
+            {
+                cpuUsagePercent =
+                    (float)(
+                        (cpuTimeUsed /
+                        (timeWindow * processorCount)) * 100.0
+                    );
+
+                cpuUsagePercent =
+                    Mathf.Clamp(cpuUsagePercent, 0f, 100f);
+            }
+
+            lastCpuTime = cpuTime;
+            lastSampleTime = now;
+        }
+        catch
+        {
+        }
     }
 
     private void RenderText()
@@ -131,9 +185,11 @@ public class F3Debuger : MonoBehaviour
         Vector3 pos = playerTransform.position;
         bufferLength = 0;
 
-        // --- FPS y Posición ---
+        // FPS
         AppendString("FPS: ");
         AppendInt(currentFps);
+
+        // Posición
         AppendString("\nXYZ: ");
         AppendFloat(pos.x);
         AppendString(" / ");
@@ -141,30 +197,31 @@ public class F3Debuger : MonoBehaviour
         AppendString(" / ");
         AppendFloat(pos.z);
 
-        // --- Memoria RAM (En tiempo real) ---
+        // RAM
         AppendString("\nRAM: ");
-        AppendInt((int)allocatedRamMB);
+        AppendInt((int)ramUsageMB);
         AppendString(" MB");
 
-        // --- Procesador (CPU %) ---
+        // CPU
         AppendString("\nCPU: ");
         AppendString(cpuName);
         AppendString(" [Uso: ");
         AppendFloat(cpuUsagePercent);
         AppendString("%]");
 
-        // --- Tarjeta Gráfica (GPU) ---
+        // GPU
         AppendString("\nGPU: ");
         AppendString(gpuName);
         AppendString(" [VRAM: ");
         AppendInt(vramMB);
         AppendString(" MB]");
 
-        // Renderizado optimizado sin GC
-        debugText.SetCharArray(textBuffer, 0, bufferLength);
+        debugText.SetCharArray(
+            textBuffer,
+            0,
+            bufferLength
+        );
     }
-
-    // --- Métodos Auxiliares Cero GC ---
 
     private void AppendString(string value)
     {
@@ -179,25 +236,37 @@ public class F3Debuger : MonoBehaviour
     {
         if (value == 0)
         {
-            if (bufferLength < textBuffer.Length) textBuffer[bufferLength++] = '0';
+            if (bufferLength < textBuffer.Length)
+                textBuffer[bufferLength++] = '0';
+
             return;
         }
 
         if (value < 0)
         {
-            if (bufferLength < textBuffer.Length) textBuffer[bufferLength++] = '-';
+            if (bufferLength < textBuffer.Length)
+                textBuffer[bufferLength++] = '-';
+
             value = -value;
         }
 
         int temp = value;
         int digits = 0;
-        while (temp > 0) { digits++; temp /= 10; }
+
+        while (temp > 0)
+        {
+            digits++;
+            temp /= 10;
+        }
 
         for (int i = digits - 1; i >= 0; i--)
         {
             int digit = value % 10;
+
             if (bufferLength + i < textBuffer.Length)
-                textBuffer[bufferLength + i] = (char)('0' + digit);
+                textBuffer[bufferLength + i] =
+                    (char)('0' + digit);
+
             value /= 10;
         }
 
@@ -206,12 +275,22 @@ public class F3Debuger : MonoBehaviour
 
     private void AppendFloat(float value)
     {
-        AppendInt((int)value);
-        if (bufferLength < textBuffer.Length) textBuffer[bufferLength++] = '.';
+        int integerPart = (int)value;
 
-        int decimals = Mathf.Abs((int)((value - (int)value) * 100));
-        if (decimals < 10 && bufferLength < textBuffer.Length)
+        AppendInt(integerPart);
+
+        if (bufferLength < textBuffer.Length)
+            textBuffer[bufferLength++] = '.';
+
+        int decimals = Mathf.Abs(
+            (int)((value - integerPart) * 100)
+        );
+
+        if (decimals < 10 &&
+            bufferLength < textBuffer.Length)
+        {
             textBuffer[bufferLength++] = '0';
+        }
 
         AppendInt(decimals);
     }
