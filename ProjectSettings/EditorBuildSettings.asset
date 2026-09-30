@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Ecenarios/Parte 1 del primer piso.unity
     guid: 16db185f05f4064418fd059a65d9977a
   - enabled: 1
-    path: Assets/Ecenarios/Parte 2 del segundo piso.unity
+    path: Assets/Ecenarios/Parte 2 del primer piso.unity
     guid: 1f9fa1453bb2d5644bf66b0b8574e6ad
+  - enabled: 1
+    path: Assets/Ecenarios/Parte 3 del primer piso.unity
+    guid: 77dc1a7f4ed5dfd4d90ed191a54926fd
   m_configObjects: {}
