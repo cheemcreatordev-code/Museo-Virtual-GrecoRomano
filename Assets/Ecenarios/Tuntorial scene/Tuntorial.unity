@@ -712,6 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5202808f55c854841a5093c535003736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Piso: 0
 --- !u!1 &550065360
 GameObject:
   m_ObjectHideFlags: 0
@@ -2403,6 +2404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5202808f55c854841a5093c535003736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Piso: 1
 --- !u!114 &1583941609 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5285325475542350108, guid: a364d47f23ae80a44b1630191327987c, type: 3}

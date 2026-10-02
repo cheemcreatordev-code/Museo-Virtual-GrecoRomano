@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ecenarios/Piso 1/Parte 3 del primer piso.unity
     guid: 77dc1a7f4ed5dfd4d90ed191a54926fd
+  - enabled: 1
+    path: Assets/Ecenarios/Piso 2/Piso 2-ArteGriego.unity
+    guid: c0de528c4346d7b4d832e61771b423da
   m_configObjects: {}

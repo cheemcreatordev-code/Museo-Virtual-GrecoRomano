@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class CambiarEcena : MonoBehaviour
 {
+    public int Piso;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,6 @@ public class CambiarEcena : MonoBehaviour
 
     public void CambiarAlInicioDelMuseo()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(Piso);
     }
 }
