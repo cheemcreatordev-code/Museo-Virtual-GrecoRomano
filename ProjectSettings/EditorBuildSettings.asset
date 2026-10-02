@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ecenarios/Piso 2/Piso 2-ArteGriego.unity
     guid: c0de528c4346d7b4d832e61771b423da
+  - enabled: 1
+    path: Assets/Ecenarios/Piso 3/Piso 3-Arte-Romano.unity
+    guid: 6caeefe983de6cd4393f5c00eabc27e6
   m_configObjects: {}
