@@ -12118,6 +12118,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 5822821947120931875, guid: 0751c346ff10f9042945367a5d5a8883, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4f3a11237d6cc884182ffb7b2aca9028, type: 2}
     - target: {fileID: 5866666021909216657, guid: 0751c346ff10f9042945367a5d5a8883, type: 3}
       propertyPath: m_Controller
       value: 
@@ -28101,13 +28105,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430860194}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.38555586, y: -0.21872702, z: 0.11006855, w: 0.8896012}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 47.234, y: -26.624, z: 2.293}
 --- !u!43 &1462580040
 Mesh:
   m_ObjectHideFlags: 0
