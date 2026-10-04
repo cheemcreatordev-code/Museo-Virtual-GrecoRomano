@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ecenarios/Piso 4/Piso4-Maquetas.unity
     guid: d4413e6082745b34dbeec96da81d5671
+  - enabled: 1
+    path: Assets/Ecenarios/Piso 5/Piso 5-Coliseo.unity
+    guid: 1a8102be4b0cc89458f964838ab0c25d
   m_configObjects: {}
