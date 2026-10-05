@@ -2151,6 +2151,7 @@ GameObject:
   - component: {fileID: 1550887677}
   - component: {fileID: 1550887679}
   - component: {fileID: 1550887678}
+  - component: {fileID: 1550887680}
   m_Layer: 3
   m_Name: Puerta Blanca
   m_TagString: Interactuable
@@ -2405,6 +2406,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Piso: 1
+--- !u!114 &1550887680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550887670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a33aa302422b42f4fafd0c0375d2cdfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1583941609 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5285325475542350108, guid: a364d47f23ae80a44b1630191327987c, type: 3}
