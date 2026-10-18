@@ -228,6 +228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1537788704274350357}
+  - component: {fileID: 6990416762466178136}
   m_Layer: 0
   m_Name: Sarah
   m_TagString: Untagged
@@ -251,6 +252,25 @@ Transform:
   m_Father: {fileID: 571282134284823664}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &6990416762466178136
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2169752062555970479}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 37b065a16cc42dd469e10960c9265ee9, type: 3}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2309375210950690409
 GameObject:
   m_ObjectHideFlags: 0

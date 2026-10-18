@@ -77,4 +77,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ecenarios/Piso 6/Piso 6.4/Estatua de zeus.unity
     guid: 183ac9e0955300f43b69cabfced550e7
+  - enabled: 1
+    path: Assets/Ecenarios/Creditos/Creditos.unity
+    guid: 89ab7182b7934b945a0c17116a9839f3
   m_configObjects: {}
