@@ -404,7 +404,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1385d28a55abaca41bc158ded4650e59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 976608352e3659044aca63460638cf57, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9f92c6acc76a1ef46997b41938619785, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 24badbd5aa783d645af7093a3ce38e42, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -724,11 +724,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "MUSEO DE ARTE GRECO ROMANO\r\n\nDE PARTE DE PARA NADA NACIONAL NI GEOGRAPHICO\r\n\r\n\r\nDIRECCI\xD3N
+  m_text: "MUSEO DE ARTE GRECO ROMANO\r\n\r\nDE PARTE DE PARA NADA NACIONAL NI GEOGRAPHICO\r\n\r\n\r\nDIRECCI\xD3N
     GENERAL\r\nVictor Cardozo\r\n\r\nDIRECCI\xD3N CREATIVA\r\nVictor Cardozo\r\n\r\nDIRECCI\xD3N
     T\xC9CNICA\r\nVictor Cardozo\r\n\r\nDIRECCI\xD3N DE ARTE\r\nVictor Cardozo\r\n\r\n\r\nNARRACI\xD3N\r\nSarah
     Ramirez\r\n\r\nREPARTO\r\nSarah Ramirez\r\nWaster Perez\r\nDelfin Avila\r\nDanna
-    Guerrero\r\nEliezer Ceballos\r\n\r\n\r\nGU\xCDA GENERAL\r\nDanna Guerrero\r\n\r\nARTE
+    Reyes\r\nEliezer Ceballos\r\n\r\n\r\nGU\xCDA GENERAL\r\nDanna Reyes\r\n\r\nARTE
     ROMANO Y ARQUEOLOG\xCDA\r\nDelfin Avila\r\n\r\nCOLISEO ROMANO - CURADUR\xCDA
     Y EXPERTICIA\r\nWaster Perez\r\n\r\nARTE GRIEGO\r\nEliezer Ceballos\r\n\r\nTEMPLO
     DE ZEUS\r\nSarah Ramirez\r\n\r\n\r\nCONTROL DE CALIDAD Y PRUEBAS\r\nEliezer Ceballo\r\nDelfin

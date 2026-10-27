@@ -80,4 +80,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ecenarios/Creditos/Creditos.unity
     guid: 89ab7182b7934b945a0c17116a9839f3
+  - enabled: 0
+    path: Assets/Ecenarios/Advertencia/Advertencia.unity
+    guid: ef4c48ad9a5b2284580e8b363f070b44
   m_configObjects: {}
