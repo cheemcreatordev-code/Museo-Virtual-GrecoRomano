@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cubicacion
       objectReference: {fileID: 0}
+    - target: {fileID: 8346851682118973164, guid: a18849dfd8be2ba4bbf2ce6c33a77926, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8346851682407266544, guid: a18849dfd8be2ba4bbf2ce6c33a77926, type: 3}
       propertyPath: m_IsActive
       value: 0
